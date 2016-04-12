@@ -1,0 +1,173 @@
++++
+date = "2014-03-03T00:00:00Z"
+title = "Introduction to GIT WTF"
+slug = "git-wtf"
++++
+
+<style type="text/css">
+
+.yellow {
+    color: #C7C327;
+}
+
+.green {
+    color: #00C120
+}
+
+.red {
+    color: #C71E12
+}
+</style>
+
+<p>Due to the collaborative nature of <strong><em>git</em></strong>; over time
+I begin to accumulate quite a few branches and working closely in a team
+compounds this problem. Remembering what branch needs to be merged, and what
+branches need a pull can tax the little grey cells.</p>
+<!--more-->
+<p>As a solution to this problem, I present <code>git wtf</code> Instead of trying to
+explain what it is, lets just run <code>git wtf</code> and examine it’s output.</p>
+
+<p>Here is a run of <code>git wtf</code> on a project at work</p>
+
+<figure>
+<pre>
+<code>>> git wtf
+<span class='yellow'>storage-node-metadata</span> (1/5) [origin]
+    remotes/origin/storage-node-metadata
+<span class='yellow'>master</span> [origin]
+     remotes/origin/master
+     remotes/cory/master <span class='green'>is 17 commits behind</span>
+     remotes/upstream/master <span class='red'>is 2 commits ahead</span>
+<span class='yellow'>sqlalchemy08</span> (2/2) [cory]
+    remotes/cory/sqlalchemy08
+<span class='yellow'>volume-manager</span> (5/0) [origin]
+    remotes/origin/volume-manager
+    remotes/cory/volume-manager <span class='green'>is 1 commits behind</span>
+<span class='yellow'>branch-not-published</span> (2/0)
+<span class='yellow'>update-documentation</span> (0/0) [origin]
+    remotes/origin/update-documentation</code></pre>
+</figure>
+
+<p>Alot of information there, lets start with the first two lines</p>
+
+<pre>
+<code><span class='yellow'>storage-node-metadata</span> (1/5) [origin]
+    remotes/origin/storage-node-metadata</code></pre>
+
+<p>The first line has the branch name <code>storage-node-metadata</code>
+Followed in parens by how many new commits this branch introduces on top of
+<code>master</code> (commits ahead). Next is a slash <code>/</code> followed by
+the number of commits master has that are missing from this branch (commits
+behind).  Following that in brackets is the name of the remote repo this branch
+is tracking, in this case we are tracking <code>[origin]</code>.</p>
+
+<p>In short this one line provides the following: 
+<code>branch-name (commits ahead/commits behind) [name-of-tracking-remote]</code></p>
+
+<p>The second line in our example is indented and shows a list of remotes where this branch
+exists. I published this branch to my github fork of the project so it
+only shows 1 entry for origin. Knowing what other remotes have this branch can
+be very helpful. If for instance you are collaborating on a single branch.</p>
+
+<p>So in review, the <code>storage-node-metadata</code> branch has 1 commit not
+merged into master, and is 5 commits behind master</p>
+
+<h4>Master</h4>
+<p>Now lets look at <code>master</code></p>
+<pre>
+<code><span class='yellow'>master</span> [origin]
+     remotes/origin/master
+     remotes/cory/master <span class='green'>is 17 commits behind</span>
+     remotes/upstream/master <span class='red'>is 2 commits ahead</span></code></pre>
+
+<p>Since it’s master it doesn't have commits ahead or behind <code>(0/0)</code>
+and should always follow <code>[origin]</code>. The following indented lines
+show all the remotes master can pull from. You can see
+<code>remotes/cory/master</code> is 17 commits behind our master, this means
+<strong><em>cory</em></strong> should pull from us or from upstream. You can also see
+that upstream is 2 commits ahead, this means we should pull from upstream. <code>git
+wtf</code> will also show if <strong><em>our</em></strong> master is ahead and
+needs to be pushed.</p>
+
+<h4>Tracking Remote Branches</h4>
+<p>On the next line we see the <code>sqlalchemy08</code> branch.</p>
+
+<pre><code><span class='yellow'>sqlalchemy08</span> (2/2) [cory]
+    remotes/cory/sqlalchemy08</code></pre>
+
+<p>In this branch cory has a patch to introduce sqlalchemy 8.0 into our project.
+Since I was reviewing the patch I tracked cory's branch. You will
+notice this branch tracks <code>[cory]</code> instead of <code>[origin]</code>.
+Also notice <code>git wtf</code> shows us this branch has 2 commits ahead of
+master, and 2 behind. I might need to rebase before I merge this branch into master.</p>
+
+<h4>Collaborating on single branch</h4>
+<p>Next we see the <code>volume-manager</code> branch.</p>
+
+<pre><code><span class='yellow'>volume-manager</span> (5/0) [origin]
+    remotes/origin/volume-manager
+    remotes/cory/volume-manager <span class='green'>is 1 commits behind</span></code></pre>
+
+<p>Me and cory are collaborating on this branch. <code>[origin]</code> tells us
+the local branch is tracking origin but the following two indented lines shows
+cory has this branch also. It also tells us cory's branch is 1 commit behind.
+Which means he needs to pull from us.</p>
+
+<h4>Un-published branches</h4>
+<p>Moving on we see <code>branch-not-published</code></p>
+
+<pre><code><span class='yellow'>branch-not-published</span> (2/0)</code></pre>
+
+<p><code>(2/0)</code> tells us the branch has 2
+commits ahead, and no commits behind. Also there is no
+<code>[name-of-tracking-remote]</code> so we know this branch is not tracking a
+remote. Notice there are no indented lines following this line. This means
+there are no remote branches so we know this branch is local only.</p>
+
+<h4>Already merged</h4>
+<p>I originaly created <code>git wtf</code> to help me clean up already merged
+branches. Often I do this clean up weeks or months after a branch has
+been merged into master.</p>
+<pre><code><span class='yellow'>update-documentation</span> (0/10) [origin]
+    remotes/origin/update-documentation</code></pre>
+
+<p>Here you can see this branch has already been merged, as it has no new
+commits to provide and is behind master by 10 commits. which probably means it
+hasn't been updated in a while</p>
+
+<h4>Final Note</h4>
+
+<p><code>git wtf</code> does not preform a <code>git fetch</code> to determine the
+status of remote branches, you have to keep your local git repo updated by
+preforming <code>git fetch</code> yourself. I made a helper script called 
+<code>git fetch-all</code> which does exactly what it says, it runs <code>git fetch</code> for all
+the remotes git knows about. You can get a copy 
+<a href="https://github.com/thrawn01/dev-tools/blob/master/git-fetch-all">here</a></p>
+
+<h4>TLDR</h4>
+<p><code>git wtf</code> brings order to chaos and riches to poor git programmers.</p>
+
+<h2>Installation</h2>
+<p>Download a copy of the <code>git wtf</code> script from 
+<a href="https://github.com/thrawn01/dev-tools/blob/master/git-wtf">here</a></p>
+
+<h4>OSX</h4>
+<p>
+    <ol>
+        <li>Chdir to git’s exec-path directory <code>cd `git --exec-path`</code></li>
+        <li>Copy the script there and call it <code>git-wtf</code></li>
+    </ol>
+</p>
+
+<h4>Ubuntu/Linux Distro’s</h4>
+<p>On Ubuntu you have 2 options.</p>
+
+<p>
+    <ol>
+        <li>Repeat the install instructions for OSX</li>
+        <li>Place the <code>git-wtf</code> script somewhere in your local
+        $PATH, where <code>git</code> will find it. I usually create a
+        <code>~/bin</code> directory and add <code>~/bin</code> to my $PATH then 
+        place <code>git-wtf</code> and all my other git helper scripts there.
+    </ol>
+</p>

@@ -1,0 +1,110 @@
+baseurl = "http://thrawn01.org"
+disablePathToLower = false
+languageCode = "en-us"
+title = "thrawn01.org"
+theme = "hugo-octopress"
+
+# number of blog posts displayed in each page
+paginate = 6
+
+pygmentsuseclasses = true
+pygmentsstyle = "solarized"
+
+# you need to install Solarized from https://github.com/john2x/solarized-pygment.git
+# Octopress blog used Solarized_dark
+# options are solarized_dark (octopress), solarized_dark256 and default (solarized light)
+
+# will make the highlight shortcode and ``` do the same thing - otherwise they are treated differently and we do not want that
+pygmentscodefences = true
+
+# can pass in pygments options here, it can also be added in the highlight shortcode
+pygmentsoptions = "linenos=true"
+
+[permalinks]
+post = "posts/:year/:month/:filename/" # change the post URL to look like the old ones
+
+# make tags and categories work
+[indexes]
+	tag = "tags"
+	category = "categories"
+
+# menu
+# links will open in a new window except links to "/" - links are added to navigation in hugo-octopress/layouts/partials/navigation.html
+[[menu.main]]
+	Name = "Blog"
+	URL = "/"
+	weight = -5
+
+[[menu.main]]
+	Name = "Archive"
+	URL = "/archive"
+	weight = -5
+
+#[[menu.main]]
+#	Name = "Resume"
+#	URL = "https://www.google.com/"
+#	weight = -5
+
+[params]
+	# number of recent posts that will be shown in the sidebar - set to 0 or remove to hide this section
+	sidebarRecentLimit = 5
+
+	# sidebar menu
+	# if true will add a sidebar menu between sidebar text and recent posts
+	sidebar_menu_enabled = false
+	sidebar_menu_header = "Sidebar Links"
+
+	# if false, all of the post will appear on front page (and in pagination)
+	truncate = true
+
+	# author's name (this will appear in metadata and under posts)
+	author = "Derrick J. Wippler"
+
+	# appears in the site header under website title
+	subtitle = "Grammar on my terms"
+
+	# used in the search engine
+	search_engine_url = "https://www.google.com/search"
+
+	# Text of the Continue Reading label. &rarr; == right arrow, but it gets messed up in the string so we will add it to index.html manually
+	continue_reading = "Read on"
+
+	# Google analytics code
+	googleAnalytics = "google analytics"
+
+	# disqus shortcode
+	# disable comments for a specific post by adding "comments: false" in its frontmatter
+	disqusShortname = "Your Google Analytics tracking code"
+
+	# sidebar links
+	github = "https://github.com/thrawn01/"
+	bitbucket = ""
+	twitter = "https://twitter.com/thrawn01/"
+	keybase = "https://keybase.io/thrawn01/"
+	stackoverflow = ""
+	linkedin = "https://www.linkedin.com/in/thrawn01"
+	googleplus = ""
+	youtube = ""
+	facebook = ""
+
+	rss = true  # switch to true to enable RSS icon link
+
+	defaultDescription = ""
+
+	# populate this with your own keywords
+	# defaultKeywords = ["keyword1" , "keyword2" , "keyword3" , "keyword4"]
+
+	# css override files
+	# paths should be relative to the `static` directory (either the website static directory or the theme one)
+    custom_css = ["css/solarized.css"]
+
+	# 404.html header and text -both support markdown
+	notfound_header = "There's nothing here"
+
+	notfound_text = """Please either go back or use the navigation/sidebar menus.
+	"""
+
+# blackfriday is Hugo's markdown engine. Options are at: https://gohugo.io/overview/configuration/ (scroll down to "Configure Blackfriday rendering")
+[blackfriday]
+	hrefTargetBlank = true # open the external links in a new window
+	fractions = false
