@@ -21,7 +21,7 @@ pygmentscodefences = true
 pygmentsoptions = "linenos=true"
 
 [permalinks]
-post = "posts/:year/:month/:filename/" # change the post URL to look like the old ones
+post = "posts/:year/:month/:day/:filename/" # change the post URL to look like the old ones
 
 # make tags and categories work
 [indexes]
