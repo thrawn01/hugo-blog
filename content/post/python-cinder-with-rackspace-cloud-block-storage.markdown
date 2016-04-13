@@ -13,15 +13,15 @@ In order to create a volume using cinder you need a few things from the Rackspac
 
 Your username and account number
 
-{% img http://thrawn01.org/images/username-account-number.png %}
+{{< img "username-account-number.png" >}}
 
 Your API key
 
-{% img http://thrawn01.org/images/api-key.png %}
+{{< img "api-key.png" >}}
 
 Look for the 'Region' value on the server detail page
 
-{% img http://thrawn01.org/images/server-details.png %}
+{{< img "server-details.png" >}}
 
 There are 3 valid regions
 
