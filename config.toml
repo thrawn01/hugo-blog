@@ -5,7 +5,7 @@ title = "thrawn01.org"
 theme = "hugo-octopress"
 
 # number of blog posts displayed in each page
-paginate = 6
+paginate = 12
 
 pygmentsuseclasses = true
 pygmentsstyle = "solarized"
