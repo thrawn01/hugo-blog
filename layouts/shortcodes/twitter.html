@@ -1,0 +1,5 @@
+<div style="width:100%">
+	<div style="margin: 0 auto;">
+		{{ (getJSON "https://api.twitter.com/1/statuses/oembed.json?id=" (index .Params 0)).html | safeHTML }}
+	</div>
+</div>
