@@ -29,15 +29,19 @@ post = "posts/:year/:month/:day/:filename/" # change the post URL to look like t
 	category = "categories"
 
 [[menu.main]]
+	Name = "Blog"
+	URL = "/"
+	weight = -5
+
+[[menu.main]]
 	Name = "Archive"
 	URL = "/archive"
 	weight = 0
 
 [[menu.main]]
-	Name = "Blog"
-	URL = "/"
-	weight = -5
-
+	Name = "Resume"
+	URL = "resume.html"
+	weight = 10
 
 #[[menu.main]]
 #	Name = "Resume"
