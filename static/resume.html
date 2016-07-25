@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)http://localhost:8080/pkg/github.com/thrawn01/resume/ -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#375EAB">
+
+    <title>résumé - The Go Programming Language</title>
+
+    <link type="text/css" rel="stylesheet" href="./css/style.css">
+
+    <link rel="stylesheet" href="./css/jquery.treeview.css">
+    <script type="text/javascript">window.initFuncs = [];</script>
+</head>
+<body data-feedly-mini="yes">
+
+<div id="lowframe"
+     style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+    ...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide">
+    <div class="container">
+        <div class="top-heading" id="heading-wide"><a href="https://golang.org">The Go Programming Language</a>
+        </div>
+        <div class="top-heading" id="heading-narrow"><a href="https://golang.org">Go</a></div>
+        <a href="resume.html#" id="menu-button"><span
+                id="menu-button-arrow">▽</span></a>
+        <form method="GET" action="http://godoc.org">
+            <div id="menu" style="min-width: 60px;">
+                <a href="/">Back To Blog</a>
+                <input type="text" id="search" name="q" class="inactive" value="Search" placeholder="Search">
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div id="page" class="wide" tabindex="-1" style="outline: 0px;">
+    <div class="container">
+
+
+        <h1>Package résumé</h1>
+
+
+        <div id="nav"></div>
+
+
+        <!--
+            Copyright 2009 The Go Authors. All rights reserved.
+            Use of this source code is governed by a BSD-style
+            license that can be found in the LICENSE file.
+        -->
+        <!--
+            Note: Static (i.e., not template-generated) href and id
+            attributes start with "pkg-" to make it impossible for
+            them to conflict with generated attributes (some of which
+            correspond to Go identifiers).
+        -->
+
+        <script type="text/javascript">
+            document.ANALYSIS_DATA = null;
+            document.CALLGRAPH = null;
+        </script>
+
+
+        <div id="short-nav">
+            <dl>
+                <dd><code>import "github.com/thrawn01"</code></dd>
+            </dl>
+            <dl>
+                <dd><a href="resume.html#pkg-overview" class="overviewLink">Overview</a>
+                </dd>
+                <dd><a href="resume.html#pkg-index" class="indexLink">Index</a></dd>
+
+
+            </dl>
+        </div>
+        <!-- The package's Name is printed as title by the top-level template -->
+        <div id="pkg-overview" class="toggleVisible">
+            <div class="collapsed">
+                <h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+            </div>
+            <div class="expanded">
+                <h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+                <p>
+                    I’m a software engineer with 16 years of on the job experience fluent in
+                    Python, GoLang, Javascript, AngularJS and HTML5 in addition to experience with
+                    Java, PHP, Perl and C/C++.
+                </p>
+                <p>
+                    Experienced with both backend server development and frontend UI/UX. I’ve done
+                    just about everything in the technology industry from kernel module to mobile
+                    game development. I’ve been an openstack contributor; I’ve run a small game
+                    startup, a few open source projects and several development teams, not only as
+                    technical lead but as mentor and project manager. I enjoy building systems with
+                    an eye for usability, sustainability and availability. I also enjoy being a
+                    liaison for teams and individuals and bringing individuals together to clear
+                    roadblocks for joint projects.
+                </p>
+                <p>
+                    Most recently I’ve been lecturing on containers and kubernetes as I believe
+                    these represent the future of building robust, sustainable and highly available
+                    systems. I am actively seeking opportunities to work with kubernetes in a
+                    production environment.
+                </p>
+                <p>
+                    Also, my former employees said I was the best boss they ever worked for. Which
+                    is cool because I didn’t pay them a lot, so I must have been awesome =D
+                </p>
+
+            </div>
+        </div>
+
+
+        <div id="pkg-index" class="toggleVisible">
+            <div class="collapsed">
+                <h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+            </div>
+            <div class="expanded">
+                <h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+                <!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+                <div id="manual-nav">
+                    <dl>
+
+                        <dd><a href="resume.html#pkg-constants">Projects</a>
+                        </dd>
+
+
+                        <dd><a href="resume.html#pkg-variables">Variables</a>
+                        </dd>
+
+
+                        <dd><a href="resume.html#ContactInfo">type
+                            ContactInfo</a></dd>
+
+
+                        <dd><a href="resume.html#Description">type
+                            Description</a></dd>
+
+
+                    </dl>
+                </div><!-- #manual-nav -->
+
+            </div><!-- .expanded -->
+        </div><!-- #pkg-index -->
+
+        <div id="pkg-callgraph" class="toggle" style="display: none">
+            <div class="collapsed">
+                <h2 class="toggleButton" title="Click to show Internal Call Graph section">Internal call graph ▹</h2>
+            </div> <!-- .expanded -->
+            <div class="expanded">
+                <h2 class="toggleButton" title="Click to hide Internal Call Graph section">Internal call graph ▾</h2>
+                <p>
+                    In the call graph viewer below, each node
+                    is a function belonging to this package
+                    and its children are the functions it
+                    calls—perhaps dynamically.
+                </p>
+                <p>
+                    The root nodes are the entry points of the
+                    package: functions that may be called from
+                    outside the package.
+                    There may be non-exported or anonymous
+                    functions among them if they are called
+                    dynamically from another package.
+                </p>
+                <p>
+                    Click a node to visit that function's source code.
+                    From there you can visit its callers by
+                    clicking its declaring <code>func</code>
+                    token.
+                </p>
+                <p>
+                    Functions may be omitted if they were
+                    determined to be unreachable in the
+                    particular programs or tests that were
+                    analyzed.
+                </p>
+                <!-- Zero means show all package entry points. -->
+                <ul style="margin-left: 0.5in" id="callgraph-0" class="treeview"></ul>
+            </div>
+        </div> <!-- #pkg-callgraph -->
+
+
+        <h2 id="pkg-constants">Projects</h2>
+
+        <h3>Contributor</h3>
+        <p>
+            Cinder Extension (<a href="https://github.com/rackerlabs/rackspace_cinder_extensions">https://github.com/rackerlabs/rackspace_cinder_extensions</a>)
+            is a set of cinder extensions used to gain insight to a cinder deployment
+            using lunr.
+        </p>
+        <p>
+            AtomHopper (<a
+                href="https://github.com/rackerlabs/atom-hopper">https://github.com/rackerlabs/atom-hopper</a>) Is a
+            Java based ATOM
+            PUB Server. I maintained this project for a short while.
+        </p>
+
+
+        <h3>OpenSource</h3>
+        <p>
+            Hubble (<a href="https://github.com/thrawn01/hubble">https://github.com/thrawn01/hubble</a>) is a very
+            flexible and powerful
+            shell environment manager. I wrote this primarily to make interacting with
+            disparate openstack deployments. However it's usability is generatlized
+            enough to be used for non openstack projects.
+        </p>
+        <p>
+            SubCommand (<a href="http://subcommand.org/">http://subcommand.org</a>) is a simple and concise SubCommand
+            parser
+            to assist CLI developers in creating relatively complex CLI tools.
+        </p>
+        <p>
+            Args (<a href="http://github.com/thrawn01/args">http://github.com/thrawn01/args</a>) is a 12 factor app
+            configuration and
+            argument parser designed for use in distributed services with support for
+            CLI clients and live server configuration reloading.
+        </p>
+
+
+        <h3>Entrepreneur</h3>
+        <p>
+            SuperRetro16 (<a href="http://www.superretro16.com/">http://www.superretro16.com</a>) is Super NES Emulator
+            for Android.
+            Wrote Software emulation for SPC700, SuperFX and 65c186 and others in RISC
+            assembly. C++ JNI interface code for the Android platform to interface with
+            the RISC assembly, wrote Dropbox support for syncing ROMS across devices and
+            ported SuperRetro16 product to the Ouya Console (<a href="http://ouya.com/">http://ouya.com</a>).
+        </p>
+        <p>
+            Air Kingdoms <a href="http://www.airkingdoms.com/">http://www.airkingdoms.com</a> I provided the inspiration
+            of
+            original game design, Motivated the creative direction of the game.
+            Organized and managed developers and artists, with a focus on employee
+            empowerment and 1 on 1 sessions. Wrote early Prototype with a focus on fun
+            first. Engineered early pathing system based on heat maps.
+        </p>
+
+
+
+        <h2 id="pkg-variables">Work History</h2>
+
+            Working as a developer in the industry for 16+ years
+        <h3 id="hdr-Developer_III___Rackspace_2013_2016">Developer III - Rackspace 2013-2016</h3>
+        <p>
+            Welcomed back to the rackspace family by the same team (Cloud Block
+            Storage). I continued to support the product while striving to make the
+            system more reliable and supportable. Continued mentoring and giving talks,
+            Introduced golang for our backend support services. Created development
+            roadmaps, mockups and coded Encore UI pages for support to gain insight into
+            CBS and provide fanatical support. Wrote tons of supportability scripts and
+            operations tools using SALT/Python. Joined the Intel/Rackspace OSIC
+            initiative with the high level goal of encouraging enterprise adoption by
+            focusing development on capabilities that simplify daily operation.
+        </p>
+        <h3 id="hdr-Partner___BubbleZap_Games_2012_2013">Partner - BubbleZap Games 2012-2013</h3>
+        <p>
+            Me and a partner developed a SuperNES emulator in our spare time beginning
+            late 2007 and eventually launched on the android market with little success.
+            Only after google started to crack down on GPL violators did our emulator
+            begin to gain traction around 2011-2012. Soon we had enough income to employ
+            both the original founders an additional developer, and two artists. After a
+            heartbreaking fall out with my partner I left the company and returned to
+            Rackspace.
+        </p>
+        <h3 id="hdr-Developer_III___Rackspace_2009_2012">Developer III - Rackspace 2009-2012</h3>
+        <p>
+            While filling the role of a developer; I continued to seek ways of improving
+            process and create tools that help eliminate non-value add tasks. I write
+            documentation in the form of procedures and guidelines for myself and
+            others. I have fixed complex technical problems and provided complete
+            solutions in a timely manner and in critical situations. I continue to
+            actively mentor and encourage others to embrace change and improve the
+            quality of their work.
+        </p>
+<pre>var Projects = []string {
+  "Cloud Block Storage",
+  "Customer View - Ticketing Service",
+  "Global Data Center Maintenance Calendar",
+  "Difficulty Management (Incident Management - UK )",
+  "Notification Tool Re-factor and stabilization",
+  "ITIL Implementation of Change Management in ServiceNow",
+  "ITIL Implementation of Help Desk in ServiceNow",
+  "Maintain Atom Pub Server in Java",
+  "CORE Developer",
+}
+</pre>
+        <h3 id="hdr-Software_Engineer___Billing_Solutions_Group">Software Engineer - Billing Solutions Group</h3>
+        <p>
+            Maintained and improve radius proxy servers product written in Python and
+            assisted in the special projects division of systems development with C++
+            development. Designed and improved web applications (Python, PHP,
+            JavaScript) and assisted the web development team with infrastructure
+            changes. Assisted Systems administration in designing a system of programs
+            and scripts written in perl and python to automate install and manage Linux
+            operating systems.
+        </p>
+<pre>var Projects = []string {
+  "Radius Server Developer (Python)",
+  "AT&amp;T Wifi Clearing House software",
+  "Migrated source code from Sourcesafe to Subversion revision control",
+  "Created new build system for half a million lines of code (C++, QT)",
+  "Introduced Unit Testing with CXXTest and Ctest (C++)",
+  "Data entry web Interface for Telephone LEC's ( PHP, Mysql, Smarty, Javascript )",
+  "PHP library to interface with the proprietary clearing house engine ( PHP, Mysql )",
+  "Defined and Simplified software deployment prodcedures",
+  "Developed a regression testing system for the core processing engine ( Python )",
+  "Developed Credit Card processing API for e-commerce client sites (PHP)",
+}
+</pre>
+        <h3 id="hdr-Software_Engineer___Logical_Solutions_Inc_2000_2006">Software Engineer - Logical Solutions Inc
+            2000-2006</h3>
+        <p>
+            Software engineer for “Point Of Sale” IQ2000 systems. Innovated and improved
+            current administrative tools. Designed, implemented and tested POS terminals
+            for nationwide deployment. Provided remote on the phone technical support
+            for Logical Solutions POS systems. Advised management on technical software
+            related issues. Active in teaching other programmers new programming
+            languages, emphases on using the correct software language to meet the
+            client's needs. Organized software developers and electronic engineers to
+            achieve project goals. Able to handle multiple development projects
+            simultaneously. Able to learn new protocols and technologies (RFCs),
+            Identify bugs or problems in 3rd party, open source libraries and fix them
+            without 3rd party assistance. Designed and wrote software to meet and exceed
+            client requirements, budget and timeline.
+        </p>
+<pre>Projects = []string {
+  "Web Configuration App for IQ2000 (Perl)",
+  "Developed Linux 2.6 kernel device drivers for Intel 8255 digital I/O controller for LCD and keypad",
+  "Constructed an embedded Linux distro from busybox, 8MB RAM 15MB diskonchip for win-systems boards",
+  "LED Sign Control Software on an embedded Linux platform, via RS-485 network (C)",
+  "Re-wrote some of libSSH for a remote SFTP project",
+  "Modified bsdftpssl FTP daemon to support 990 SSL protocol",
+  "Designed and developed Touch screen POS ticket terminals",
+  "Wrote parallel printer drivers for a high-speed thermal ticket printer",
+  "Wrote Serial communication for VFD Display",
+  "Implemented a struct based communication protocol for ticket printer operation via TCP/IP",
+  "Wrote the server daemon for communicating to the POS terminals",
+  "Created custom device driver API for POS Terminals (C++/QT)",
+  "Wrote a secure web application for administering the POS data collection system",
+  "Wrote command line scripts for automated administration and maintenance of the POS data warehouse",
+  "Designed and implemented master queuing daemon for central collection server",
+  "Wrote Perl toolkit for reading and writing foxpro codebase database files",
+  "Designed and wrote statistical employee graph reports for payroll",
+  "Designed and wrote sales reporting and historical comparison reports",
+  "Modified <a href="http://www.issue-tracker.com/">http://www.issue-tracker.com</a> to access both MS SQL Server and MYSQL to meet internal company needs",
+}
+</pre>
+
+
+        <h2 id="ContactInfo">type <a href="">ContactInfo</a>
+        </h2>
+        <p>
+            Email: thrawn01@gmail.com
+        </p>
+        <p>
+            Twitter: <a href="https://twitter.com/thrawn01">https://twitter.com/thrawn01</a>
+        </p>
+        <p>
+            LinkedIn: <a href="https://www.linkedin.com/in/thrawn01">https://www.linkedin.com/in/thrawn01</a>
+        </p>
+        <p>
+            Blog: <a href="http://thrawn01.org/">http://thrawn01.org</a>
+        </p>
+
+        <h2 id="Description">type <a href="">Description</a>
+        </h2>
+        <p>
+            Why does this resume look funny? Because it's a godoc! (See <a href="http://godoc.org/">http://godoc.org</a>)
+        </p>
+
+
+        <div id="footer">
+            Build version go1.6.<br>
+            Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+            the content of this page is licensed under the
+            Creative Commons Attribution 3.0 License,
+            and code is licensed under a <a href="/LICENSE">BSD license</a>.<br>
+            <a href="/doc/tos.html">Terms of Service</a> |
+            <a href="http://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+        </div>
+
+    </div><!-- .container -->
+</div><!-- #page -->
+
+<!-- TODO(adonovan): load these from <head> using "defer" attribute? -->
+<script type="text/javascript" src="./javascript/jquery.js"></script>
+<script type="text/javascript" src="./javascript/jquery.treeview.js"></script>
+<script type="text/javascript" src="./javascript/jquery.treeview.edit.js"></script>
+
+
+<script type="text/javascript" src="./javascript/godocs.js"></script>
+
+
+</body>
+</html>
