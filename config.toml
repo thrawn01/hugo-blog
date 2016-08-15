@@ -1,4 +1,4 @@
-baseurl = "http://thrawn01.org/"
+baseurl = "/"
 disablePathToLower = false
 languageCode = "en-us"
 title = "thrawn01.org"
