@@ -12,11 +12,12 @@ build: build-site build-image
 build-image:
 	docker build -t ${DOCKER_REPO}/hugo-blog:latest .
 
-run-image:
+run: build
 	@echo "Running Image on port 1313"
-	docker run -p 1313:80 thrawn01/hugo-blog:latest
+	-docker rm hugo-blog
+	docker run -p 1313:80 --name hugo-blog thrawn01/hugo-blog:latest
 
-publish-image: build-image
+publish: build-image
 	docker push ${DOCKER_REPO}/hugo-blog:latest
 
-all: build-site
+all: build
