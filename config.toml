@@ -8,7 +8,7 @@ theme = "hugo-octopress"
 paginate = 12
 
 pygmentsuseclasses = true
-pygmentsstyle = "solarized"
+pygmentsstyle = "default"
 
 # you need to install Solarized from https://github.com/john2x/solarized-pygment.git
 # Octopress blog used Solarized_dark

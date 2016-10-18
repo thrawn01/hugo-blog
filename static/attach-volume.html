@@ -1,0 +1,455 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="./css/markdownpad-github.css" type="text/css" />
+</head>
+<body>
+<p>These are the steps taken by Nova and Cinder when an attach is issued</p>
+<h1 id="step-1">Step 1</h1>
+<p>Attach a volume to the specified server</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">HTTP Verb</th>
+<th align="left">URI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">POST</td>
+<td align="left">https://{region}.servers.api.rackspacecloud.com/v2/tenant_id}/servers/{server_id}/os-volume_attachments</td>
+</tr>
+</tbody>
+</table>
+<h4 id="post-body">POST Body</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;volumeAttachment&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+        <span class="dt">&quot;volumeId&quot;</span><span class="fu">:</span> <span class="st">&quot;a26887c6-c47b-4654-abb5-dfadf7d3f803&quot;</span>
+    <span class="fu">}</span>
+<span class="fu">}</span></code></pre></div>
+<h3 id="response-body">Response Body</h3>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;volumeAttachment&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+        <span class="dt">&quot;device&quot;</span><span class="fu">:</span> <span class="st">&quot;/dev/vdd&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;a26887c6-c47b-4654-abb5-dfadf7d3f803&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;serverId&quot;</span><span class="fu">:</span> <span class="st">&quot;0c92f3f6-c253-4c9b-bd43-e880a8d2eb0a&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;volumeId&quot;</span><span class="fu">:</span> <span class="st">&quot;a26887c6-c47b-4654-abb5-dfadf7d3f803&quot;</span>
+    <span class="fu">}</span>
+<span class="fu">}</span></code></pre></div>
+<h4 id="preconditions">Preconditions</h4>
+<ul>
+<li>You can attach a volume to a server with an ACTIVE, PAUSED, SHUTOFF, VERIFY_RESIZE, or SOFT_DELETED status.</li>
+<li>You can attach a volume to a server with a status that is not locked.</li>
+<li>You can attach a volume when its status is 'available'.</li>
+<li>You can attach a volume when its volume type supports volume attaching.</li>
+</ul>
+<h4 id="asynchronous-postconditions">Asynchronous Postconditions</h4>
+<ul>
+<li>After successfully attaching a volume to a server, the volume status changes to 'in-use'.</li>
+<li>You can see the attached volume when you log in to the server.</li>
+</ul>
+<h4 id="troubleshooting">Troubleshooting</h4>
+<p>If the volume status remains in available state, the request failed. Ensure that you meet the preconditions and run the request again. If the request fails again, investigate the server and the volume status.</p>
+<h4 id="response-codes">Response Codes</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">202</td>
+<td align="left">Request Created - Async attach task started</td>
+</tr>
+<tr class="even">
+<td align="left">503</td>
+<td align="left">Service Unavailable - Internal Error, Check Log</td>
+</tr>
+<tr class="odd">
+<td align="left">400</td>
+<td align="left">Bad Request - Parameter in the request is missing</td>
+</tr>
+<tr class="even">
+<td align="left">401</td>
+<td align="left">Un Authorized</td>
+</tr>
+<tr class="odd">
+<td align="left">403</td>
+<td align="left">Un Authorized</td>
+</tr>
+<tr class="even">
+<td align="left">405</td>
+<td align="left">Bad Method</td>
+</tr>
+<tr class="odd">
+<td align="left">413</td>
+<td align="left">Over Limit</td>
+</tr>
+<tr class="even">
+<td align="left">404</td>
+<td align="left">Not Found</td>
+</tr>
+<tr class="odd">
+<td align="left">415</td>
+<td align="left">Bad Media Type</td>
+</tr>
+<tr class="even">
+<td align="left">400</td>
+<td align="left">Network Not Found</td>
+</tr>
+<tr class="odd">
+<td align="left">409</td>
+<td align="left">Build In Progress</td>
+</tr>
+</tbody>
+</table>
+<h4 id="request-parameters">Request parameters</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Parameter</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">tenant_id</td>
+<td align="left">xsd:string</td>
+<td align="left">The DDI for the account</td>
+<td align="left">Required</td>
+</tr>
+<tr class="even">
+<td align="left">server_id</td>
+<td align="left">xsd:string</td>
+<td align="left">The UUID for the server to attach to</td>
+<td align="left">Required</td>
+</tr>
+<tr class="odd">
+<td align="left">volumeId</td>
+<td align="left">xsd:string</td>
+<td align="left">The ID of the Volume to be attached</td>
+<td align="left">Required</td>
+</tr>
+<tr class="even">
+<td align="left">device</td>
+<td align="left">xsd:string</td>
+<td align="left">The path in the guest where the volume will appear (/dev/xvdb, /dev/xvda)</td>
+<td align="left">Optional</td>
+</tr>
+</tbody>
+</table>
+<h1 id="step-2">Step 2</h1>
+<p>Nova now notifies Cinder it wishes to connect to a volume by making a Cinder api call with an action of <strong>'os-initialize_connection'</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">HTTP Verb</th>
+<th align="left">URI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">POST</td>
+<td align="left">https://{region}.blockstorage.api.rackspacecloud.com/v1/{tenant_id}/volumes/{volume_id}/action</td>
+</tr>
+</tbody>
+</table>
+<h4 id="post-body-1">POST Body</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;os-initialize_connection&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+        <span class="dt">&quot;ip&quot;</span><span class="fu">:</span> <span class="st">&quot;10.22.16.10&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;initiator&quot;</span><span class="fu">:</span> <span class="st">&quot;iqn.2010-11.com.rackspace:e327a30a-98f9-4654-8029-d4e4757975f4&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;host&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span>
+    <span class="fu">}</span>
+<span class="fu">}</span></code></pre></div>
+<h4 id="response-body-1">Response Body</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json">    <span class="er">TODO</span></code></pre></div>
+<h4 id="response-codes-1">Response Codes</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">200</td>
+<td align="left">Request Completed</td>
+</tr>
+<tr class="even">
+<td align="left">500</td>
+<td align="left">Internal Error, Lunr reported a non 200 status code when trying to export the volume</td>
+</tr>
+<tr class="odd">
+<td align="left">400</td>
+<td align="left">Bad Request - A Body Parameter in the request is missing</td>
+</tr>
+<tr class="even">
+<td align="left">405</td>
+<td align="left">Bad Method - Incorrect method name in action body</td>
+</tr>
+<tr class="odd">
+<td align="left">404</td>
+<td align="left">Not Found - Volume id was not found</td>
+</tr>
+</tbody>
+</table>
+<h4 id="preconditions-1">Preconditions</h4>
+<ul>
+<li>The 'os-initialize_connection' action body parameter must exist in the request body</li>
+<li>The 'initiator' action body parameter must exist and have a valid iqn for use by the iscsi initiator</li>
+</ul>
+<h4 id="postconditions">Postconditions</h4>
+<ul>
+<li>After returning a response of 200, The volume will be exported and accepting iscsi connections on the storage node where the volume resides.</li>
+</ul>
+<h4 id="troubleshooting-1">Troubleshooting</h4>
+<p>Cinder passes this synchronous call to Lunr which runs the ietadm command to export the volume via the passed in iqn. If Lunr returns a non 200 response for this call Cinder will return a 500. Check the Lunr logs if you get a 500 error from this call.</p>
+<h4 id="action-body-request-parameters">Action Body Request parameters</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Parameter</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ip</td>
+<td align="left">xsd:string</td>
+<td align="left">The IP Address of the hypervisor that will connect to the storage node (See Note Below)</td>
+<td align="left">Required</td>
+</tr>
+<tr class="even">
+<td align="left">initiator</td>
+<td align="left">xsd:string</td>
+<td align="left">The iqn string used by the hypervisor to connect to the storage node</td>
+<td align="left">Required</td>
+</tr>
+<tr class="odd">
+<td align="left">host</td>
+<td align="left">xsd:string</td>
+<td align="left">The Hostname of the hypervisor that was connected to the storage node</td>
+<td align="left">Optional</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The Lunr driver ignores the 'host' parameter sent via this action so it can be empty</strong></p>
+<p><strong>If the 'ip' is within the 10.184.0.0/16 range (Is an OnMetal server) connections will be limited to ONLY the 'ip' given in this request, all other connections will be blocked.</strong></p>
+<h1 id="step-3">Step 3</h1>
+<p>Nova tells the hypervisor to connect to the storage node via the <strong>'target_iqn'</strong> and the <strong>'target_portal'</strong> field returned by the <strong>os-initialize_connection</strong> call. During this time Nova notifies Cinder that it is connecting by making a Cinder api call with an action of <strong>'os-reserve'</strong>.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">HTTP Verb</th>
+<th align="left">URI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">POST</td>
+<td align="left">https://{region}.blockstorage.api.rackspacecloud.com/v1/{tenant_id}/volumes/{volume_id}/action</td>
+</tr>
+</tbody>
+</table>
+<h4 id="post-body-2">POST Body</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;os-reserve&quot;</span><span class="fu">:</span> <span class="kw">null</span>
+<span class="fu">}</span></code></pre></div>
+<h4 id="response-codes-2">Response Codes</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">202</td>
+<td align="left">Request Completed</td>
+</tr>
+<tr class="even">
+<td align="left">500</td>
+<td align="left">Internal Error</td>
+</tr>
+<tr class="odd">
+<td align="left">400</td>
+<td align="left">Invalid Volume - Volume not in correct state</td>
+</tr>
+<tr class="even">
+<td align="left">400</td>
+<td align="left">Bad Request - A Body Parameter in the request is missing</td>
+</tr>
+<tr class="odd">
+<td align="left">405</td>
+<td align="left">Bad Method - Incorrect method name in action body</td>
+</tr>
+<tr class="even">
+<td align="left">404</td>
+<td align="left">Not Found - Volume id was not found</td>
+</tr>
+</tbody>
+</table>
+<h4 id="preconditions-2">Preconditions</h4>
+<ul>
+<li>The status of the volume must be 'available' else the call will fail with Invalid Volume (400)</li>
+</ul>
+<h4 id="postconditions-1">Postconditions</h4>
+<ul>
+<li>The status of the volume will be 'attaching'</li>
+</ul>
+<h4 id="troubleshooting-2">Troubleshooting</h4>
+<p>This call only updates the status of the volume in the database, no iteraction with Lunr is made for this call. Check the Cinder logs if you get a 500 error from this call.</p>
+<p><strong>This operation does not return a response body</strong></p>
+<h1 id="step-4">Step 4</h1>
+<p>Once the hypervisor successfully connects to the storage node and creates a device on the guest, Nova notifies Cinder of the connection and device information by making a Cinder api call with an action of <strong>'os-attach'</strong>.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">HTTP Verb</th>
+<th align="left">URI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">POST</td>
+<td align="left">https://{region}.blockstorage.api.rackspacecloud.com/v1/{tenant_id}/volumes/{volume_id}/action</td>
+</tr>
+</tbody>
+</table>
+<h4 id="post-body-3">POST Body</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;os-attach&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+        <span class="dt">&quot;instance_uuid&quot;</span><span class="fu">:</span> <span class="st">&quot;27252881-2a76-4702-9254-ec8a0dc73332&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;mountpoint&quot;</span><span class="fu">:</span> <span class="st">&quot;/dev/xvdb&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;mode&quot;</span><span class="fu">:</span> <span class="st">&quot;rw&quot;</span>
+    <span class="fu">}</span>
+<span class="fu">}</span></code></pre></div>
+<h4 id="response-codes-3">Response Codes</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">202</td>
+<td align="left">Request Completed</td>
+</tr>
+<tr class="even">
+<td align="left">500</td>
+<td align="left">Internal Error</td>
+</tr>
+<tr class="odd">
+<td align="left">400</td>
+<td align="left">Bad Request - A Body Parameter in the request is missing or incorrect</td>
+</tr>
+<tr class="even">
+<td align="left">405</td>
+<td align="left">Bad Method - Incorrect method name in action body</td>
+</tr>
+<tr class="odd">
+<td align="left">404</td>
+<td align="left">Not Found - Volume id was not found</td>
+</tr>
+</tbody>
+</table>
+<h4 id="preconditions-3">Preconditions</h4>
+<ul>
+<li>The 'instance_uuid' action body parameter must exist. (Validity of the UUID is not verified)</li>
+<li>A Volume that has metadata marking it as { 'readonly': True } will fail with Invalid Attach Mode (400) if action body parameter 'mode' is anything but 'ro'</li>
+<li>If the 'mode' action body parameter is present it must have a value of 'rw' or 'ro'. If 'mode' is omitted the attach state will default to 'rw'.</li>
+</ul>
+<h4 id="postconditions-2">Postconditions</h4>
+<ul>
+<li>The status of the volume in Cinder will be 'in-use'</li>
+<li>The status of the volume in Lunr will be 'ATTACHED'</li>
+</ul>
+<h4 id="troubleshooting-3">Troubleshooting</h4>
+<p>Cinder updates the status of the volume to 'in-use' and passes this synchronous call to Lunr. If Lunr returns a non 200 response for this call Cinder will return a 500. Check the Lunr logs if you get a 500 error from this call.</p>
+<h4 id="action-body-request-parameters-1">Action Body Request parameters</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Parameter</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">instance_uuid</td>
+<td align="left">xsd:string</td>
+<td align="left">The UUID of the server the volume is connected too</td>
+<td align="left">Required</td>
+</tr>
+<tr class="even">
+<td align="left">mountpoint</td>
+<td align="left">xsd:string</td>
+<td align="left">The path in the guest where the volume will appear (/dev/xvdb, /dev/xvda)</td>
+<td align="left">Optional</td>
+</tr>
+<tr class="odd">
+<td align="left">host</td>
+<td align="left">xsd:string</td>
+<td align="left">The Hostname of the hypervisor that was connected to the storage node</td>
+<td align="left">Optional</td>
+</tr>
+</tbody>
+</table>
+<p><strong>This operation does not return a response body</strong></p>
+</body>
+</html>
