@@ -15,7 +15,7 @@ a non trivial bit of code.
 
 At [maligun.com](http://mailgun.com) we use Kafka for our event processing, as
 such I wrote a CLI tool to send a piped stream of events to Kafka. Kafka can
-except any number serialization protocols in the event payload, which means it
+accept any number serialization protocols in the event payload, which means it
 could be anything from JSON to Protobuf. As such I choose to delimit events by
 CR, \r,  (Carriage Return). So the program should read chunks of data into a
 buffer until it finds a CR or EOF then post the payload to Kafka on a topic
