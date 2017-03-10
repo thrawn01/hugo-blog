@@ -29,7 +29,6 @@ wanted to accomplish in making our functions private!
 
 So what are we todo?
 
-## Good package design examples
 We get clues by examining the golang standard library. Take the golang standard
 **fmt** package as an example. It’s public surface is very clean and well tested
 with 36 tests in the **fmt_test** package. Yet closer inspection reveals many
@@ -38,7 +37,7 @@ a package as well tested and widely used as **fmt** get away with zero tests on
 private functions? The answer might surprise you, as this simple rule is one of
 the hallmarks of great software design and good testing.
 
-## Only test the public interface
+## Only test the public surface
 One of the promises of the public surface is that the interface is well tested,
 as such; the public surface should be the focus of all our tests. If the
 public surface tests all possible execution paths within our public and private
@@ -53,7 +52,7 @@ Testing private functions defeats the purpose of encapsulation.
 
 When writing private functions first it is common to write tests for the
 private functions at the same time. This can result in less rigorous testing of
-the public interface, as the developer might reason the private function is
+the public surface, as the developer might reason the private function is
 well covered, no need to duplicate the same test for the public function, or at
 best results in a duplication of testing for both the public and private
 methods.
@@ -69,11 +68,11 @@ future pull requests that modify the private function update tests for the
 private function instead of testing the thing that is actually useful to our
 users, the public surface.
 
-If the initial developer correctly tested the public interface first, future
+If the initial developer correctly tested the public surface first, future
 pull requests should be judged successful if the public surface tests pass,
 regardless of what private functions were modified. As long as all code paths
 within the private functions are covered, the pull request can be judged a
-success. By just following the "test public interfaces only" rule we can avoid
+success. By just following the "test public surfaces only" rule we can avoid
 extra work in the future, increase the amount of code covered and reduce test
 overlap. 
 
