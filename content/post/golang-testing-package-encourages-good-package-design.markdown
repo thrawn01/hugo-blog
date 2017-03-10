@@ -40,21 +40,44 @@ the hallmarks of great software design and good testing.
 
 ## Only test the public interface
 One of the promises of the public surface is that the interface is well tested,
-as such; the public surface should be the focus of all your tests. If the
+as such; the public surface should be the focus of all our tests. If the
 public surface tests all possible execution paths within our public and private
 functions no private function testing is required. With thorough test coverage of
-the public surface, all possible code paths are covered. 
+the public surface, all possible code paths can be covered. 
 
-Put another way; if your are testing private functions, you are breaking the
+Put another way; if you're testing private functions, you're breaking the
 rules of encapsulation. Or if you feel the need to test a private method, it
 instead should be a public method, as private functions form the core of the
 encapsulation. No matter how many ways you say it, the result is the same.
 Testing private functions defeats the purpose of encapsulation.
 
-A code refactor is judged successful if the public surface tests pass,
-regardless of what private functions were modified. As long as all code paths
-within the private functions are covered, the package is tested. 
+When writing private functions first it is common to write tests for the
+private functions at the same time. This can result in less rigorous testing of
+the public interface, as the developer might reason the private function is
+well covered, no need to duplicate the same test for the public function, or at
+best results in a duplication of testing for both the public and private
+methods.
 
+I saw this happen recently where the developer moved the existing tests out of
+the **_test** package and into the main package so he could add tests for a
+private method. He then neglected to add the same tests for the public
+function. This could not only leave a gap of untested code in the public
+function but also breaks encapsulation, causing headaches for future pull
+requests that don't realize the testing gap or that now have to deal with a
+tested private function that is a detail of the encapsulation.  Thus requiring
+future pull requests that modify the private function update tests for the
+private function instead of testing the thing that is actually useful to our
+users, the public surface.
+
+If the initial developer correctly tested the public interface first, future
+pull requests should be judged successful if the public surface tests pass,
+regardless of what private functions were modified. As long as all code paths
+within the private functions are covered, the pull request can be judged a
+success. By just following the "test public interfaces only" rule we can avoid
+extra work in the future, increase the amount of code covered and reduce test
+overlap. 
+
+## How do I ensure my private methods are covered?
 To ensure our public surface tests cover all our private functions, golang comes
 with a built in code coverage tool to identify un-exercised code paths. For
 example, we can see all the test coverage for private functions in the **fmt**
@@ -66,12 +89,11 @@ contains many of the private functions)
  $ go tool cover -html=coverage.out
 ```
 
-Following this rule can avoid writing brittle tests of tightly coupled
-private functions that are covered by tests on the public surface. 
+This tool or one like it should be an important part of any CI setup.
 
 ## How do I avoid crowding the public surface?
 Inevitably you will write some general interfaces which are useful to many
-parts of your code, but are not strictly apart of the public surface you
+parts of our code, but are not strictly apart of the public surface you
 wish to present. These interfaces are perfect candidates for placement in a
 sub-package. In this way we create a testable public interface for our private
 code to use, but which is not strictly apart of our main packages public
