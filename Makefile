@@ -6,7 +6,6 @@ DOCKER_REPO=thrawn01
 build-site:
 	@hugo
 
-
 build: build-site build-image
 
 build-image:

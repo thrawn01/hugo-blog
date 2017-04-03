@@ -1,5 +1,4 @@
-FROM alpine:3.2
-RUN apk add --update nginx && rm -rf /var/cache/apk/*
+FROM nginx:1.11.12
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY public /usr/share/nginx/html
