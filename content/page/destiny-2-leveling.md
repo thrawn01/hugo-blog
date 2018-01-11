@@ -10,10 +10,10 @@ Item drop level is based on your **Base Light Level** and not your **Effective
 Light Level** (ELL for short). **Base Light Level** (BLL for short) is your gear
 light level, minus any mods.
 
-This means if your gun is 275 and has a +5 mod then your BLL for that gun is 270. 
-This means if the BLL of your character is 280, and you add +5 mods to all
-your gear, your ELL will be 282. legendary engrams and item drops will still
-drop at 280 since that is your BLL.
+This means if your gun is 275 and has a +5 mod then your BLL for that gun is
+270.  This means if the BLL of your character is 280, and you add +5 mods to
+all your gear, your ELL will be 285. However, legendary engrams and item drops
+will still drop at 280 since that is your BLL.
 
 You can only infuse the BLL. If you have a 275 gun with a +5 mod then it’s BLL
 is 270. If you attempt to infuse the gun into a 270 gun, destiny will tell you
