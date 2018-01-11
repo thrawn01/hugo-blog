@@ -104,8 +104,10 @@ post = "posts/:year/:month/:day/:filename/" # change the post URL to look like t
 	# 404.html header and text -both support markdown
 	notfound_header = "There's nothing here"
 
-	notfound_text = """Please either go back or use the navigation/sidebar menus.
-	"""
+	notfound_text = """Please either go back or use the navigation/sidebar menus."""
+
+	# Syntax
+	pygmentsUseClassic = true
 
 # blackfriday is Hugo's markdown engine. Options are at: https://gohugo.io/overview/configuration/ (scroll down to "Configure Blackfriday rendering")
 [blackfriday]
